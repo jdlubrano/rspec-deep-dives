@@ -17,7 +17,13 @@ RSpec.describe "Making our own change matcher" do
     it "alters the Array's size" do
       expect do
         array << 1
-      end.to alter(array, :size)
+      end.to alter { array.size }
+
+    it "does not alter the Array's size" do
+      expect do
+        array << 2
+        array.pop
+      end.not_to alter(array, :size)
     end
   end
 end
